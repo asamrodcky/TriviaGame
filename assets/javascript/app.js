@@ -1,3 +1,6 @@
+$(document).ready(function () {
+// array filled w keys/objects of the questions and their respective
+// answer choices
 var questions= [
    {
     q: "A clerk of a butcher shop stands five feet ten inches tall and wears size 13 sneakers. What does he weigh?",
@@ -110,13 +113,17 @@ var questions= [
    },
 ];
 
+// printing out the questions and their answer choices on the webpage
 for(i = 0; i < questions.length; i++){
     $("#quiz").append("<p>"+ (i+1) + ". " + questions[i].q + "</p> <br>")
     Object.keys(questions[i].a).forEach((key, index)=>{
-        $("#quiz").append(key,". ",questions[i].a[key], "<br>")
+        $("#quiz").append(
+            "<input type='radio' name='choice' value="+[key] +"></input>" + 
+            key,". ",questions[i].a[key], "<br>")
     })
     $("#quiz").append("<br>")
 }
 
 var quizOver = false;
 
+})
