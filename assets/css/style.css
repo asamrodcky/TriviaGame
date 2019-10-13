@@ -1,0 +1,44 @@
+*{
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Arial', 'Helvetica Neue', Helvetica, sans-serif;
+    background:#DAE0F2;
+    font-size: 18px;
+}
+
+/* Fonts for h1 tags */
+h1{
+    font-family: 'Georgia', Times, Times New Roman, serif;
+    font-size: 24px;
+    text-align: center;
+}
+.header{
+    width: 100%;
+    background-color: white;
+    padding:20px;
+    margin-bottom: 10px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: darkgray;
+}
+
+#time{
+    text-align: center;
+    margin-bottom: 10px;
+    padding:20px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: darkgray;
+    background-color: white;
+}
+
+#gif{
+    text-align: center;
+}
+
+#submit{
+    margin-bottom: 10px;
+    padding:10px;
+}

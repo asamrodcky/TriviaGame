@@ -7,7 +7,7 @@ var questions= [
     a: {
         a: "120 lbs",
         b: "Meat",
-        c: "three hundred pounds",
+        c: "Three hundred pounds",
         d: "130 lbs",
     },
     correctAnswer: "b"
@@ -118,12 +118,106 @@ for(i = 0; i < questions.length; i++){
     $("#quiz").append("<p>"+ (i+1) + ". " + questions[i].q + "</p> <br>")
     Object.keys(questions[i].a).forEach((key, index)=>{
         $("#quiz").append(
-            "<input type='radio' name='choice' value="+[key] +"></input>" + 
+            "<input type='radio' name='"+i+"' value="+[key] +"></input>" + 
             key,". ",questions[i].a[key], "<br>")
     })
     $("#quiz").append("<br>")
 }
 
 var quizOver = false;
+var intervalId;
+var time = 120;
+var clockRunning = false;
+
+var converted = timeConverter(time)
+
+$("#time").text(converted)
+
+if (!clockRunning) {
+    intervalId = setInterval(count, 1000);
+    clockRunning = true;
+  }
+
+
+function stop() {
+    clearInterval(intervalId);
+    clockRunning = false;
+    quizOver = true;
+};
+
+function count() {
+    time--;
+  
+    //  TODO: increment time by 1, remember we cant use "this" here.
+  
+    converted = timeConverter(time);
+    // console.log(converted);
+
+    $("#time").text(converted);
+
+    if (converted == "00:00"){
+        stop();
+        alert("You are out of time!");
+    }
+  
+    //  TODO: Get the current time, pass that into the timeConverter function,
+    //        and save the result in a variable.
+  
+    $("#time").text(converted);
+
+}
+
+// Time converter function to change into min:sec
+function timeConverter(t) {
+
+    //  Takes the current time in seconds and convert it to minutes and seconds (mm:ss).
+    var minutes = Math.floor(t / 60);
+    var seconds = t - (minutes * 60);
+  
+    if (seconds < 10) {
+      seconds = "0" + seconds;
+    }
+  
+    if (minutes === 0) {
+      minutes = "00";
+    }
+  
+    else if (minutes < 10) {
+      minutes = "0" + minutes;
+    }
+  
+    return minutes + ":" + seconds;
+  }
+
+
+function checkAnswers(){
+
+}
+
+// When the submit button is clicked, the quiz is over and 
+// the page alert appears
+$("#submit").click(function(){
+    stop();
+    alert("Your quiz has been successfully submitted");
+
+    $('input:checked').map(function(){
+        var answers = $(this).val()
+        //check to see what chosen choice value is
+        console.log($(this).val());
+
+        for(i = 0; i < questions.length; i++){
+            if(answers === questions[i].correctAnswer){
+                $("#quiz").append(i + "CORRECT!")
+                console.log(i + "CORRECT!")
+            }
+            else{
+                $("#quiz").append(i + "CORRECT!")
+                console.log(i + "WRONG!")
+            }
+        }
+    
+    });
+});
+
 
 })
