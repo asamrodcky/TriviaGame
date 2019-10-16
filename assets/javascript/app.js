@@ -194,6 +194,8 @@ function checkAnswers(){
 
 }
 
+var answers = []
+
 // When the submit button is clicked, the quiz is over and 
 // the page alert appears
 $("#submit").click(function(){
@@ -201,20 +203,20 @@ $("#submit").click(function(){
     alert("Your quiz has been successfully submitted");
 
     $('input:checked').map(function(){
-        var answers = $(this).val()
+        answers.push($(this).val())
         //check to see what chosen choice value is
-        console.log($(this).val());
+        console.log(answers);
 
-        for(i = 0; i < questions.length; i++){
-            if(answers === questions[i].correctAnswer){
-                $("#quiz").append(i + "CORRECT!")
-                console.log(i + "CORRECT!")
-            }
-            else{
-                $("#quiz").append(i + "CORRECT!")
-                console.log(i + "WRONG!")
-            }
-        }
+        // for(i = 0; i < questions.length; i++){
+        //     if(answers === questions[i].correctAnswer){
+        //         $("#quiz").append(i + "CORRECT!")
+        //         console.log(i + "CORRECT!")
+        //     }
+        //     else{
+        //         $("#quiz").append(i + "CORRECT!")
+        //         console.log(i + "WRONG!")
+        //     }
+        // }
     
     });
 });
