@@ -221,5 +221,18 @@ $("#submit").click(function(){
     });
 });
 
+//Psuedocode:
+
+// Write a for loop to reprint the quiz but after every question include
+// div that states whether they answered the question correctly.
+// "results" states their answer along with the correct answer
+// and if both of the answers are the same than the question is correct
+// otherwise the question is incorrect.
+
+// Can also make printQuestions() a function and printChoices() a function
+// and ammend printChoices() to add an attribute to the choices div based on
+// whether they answered the question right or not. "correct" id/class/value/name
+// and "incorrect" and change the colors of those divs to show right vs wrong
+// answers (green = correct and red = incorrect)
 
 })
