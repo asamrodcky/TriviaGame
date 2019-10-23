@@ -113,31 +113,52 @@ var questions= [
    },
 ];
 
-// printing out the questions and their answer choices on the webpage
-for(i = 0; i < questions.length; i++){
-    $("#quiz").append("<p>"+ (i+1) + ". " + questions[i].q + "</p> <br>")
-    Object.keys(questions[i].a).forEach((key, index)=>{
-        $("#quiz").append(
-            "<input type='radio' name='"+i+"' value="+[key] +"></input>" + 
-            key,". ",questions[i].a[key], "<br>")
-    })
-    $("#quiz").append("<br>")
+function renderQuiz(){
+    for(var i=0; i<questions.length;i++){
+        var qADiv = $("<div>");
+        qADiv.addClass("question");
+
+        var qPara = $("<p>");
+        qPara.attr("id", "question-"+i);
+        qPara.append(questions[i].q);
+
+        $.each(questions[i].a, function(key,value){
+            // console.log(key + ". " + value);
+            qADiv.append("<input type='radio' name='"+i+"' value= "+ key + ">")
+            qADiv.append(key + ". " + value +"<br>")
+        });
+
+        qADiv.prepend(qPara);
+        $("#quiz").append(qADiv)
+    }
 }
+
+renderQuiz();
+// printing out the questions and their answer choices on the webpage
+// for(i = 0; i < questions.length; i++){
+
+//     $("#quiz").append("<p>"+ (i+1) + ". " + questions[i].q + "</p> <br>")
+//     Object.keys(questions[i].a).forEach((key, index)=>{
+//         $("#quiz").append(
+//             "<input type='radio' name='"+i+"' value="+[key] +"></input>" + 
+//             key,". ",questions[i].a[key], "<br>")
+//     })
+//     $("#quiz").append("<br>")
+// }
 
 var quizOver = false;
 var intervalId;
 var time = 120;
 var clockRunning = false;
 
-var converted = timeConverter(time)
+var converted = timeConverter(time);
 
-$("#time").text(converted)
+$("#time").text(converted);
 
 if (!clockRunning) {
     intervalId = setInterval(count, 1000);
     clockRunning = true;
-  }
-
+  };
 
 function stop() {
     clearInterval(intervalId);
@@ -165,7 +186,7 @@ function count() {
   
     $("#time").text(converted);
 
-}
+};
 
 // Time converter function to change into min:sec
 function timeConverter(t) {
@@ -190,9 +211,9 @@ function timeConverter(t) {
   }
 
 
-function checkAnswers(){
+// function checkAnswers(){
 
-}
+// }
 
 var answers = []
 
@@ -205,20 +226,20 @@ $("#submit").click(function(){
     $('input:checked').map(function(){
         answers.push($(this).val())
         //check to see what chosen choice value is
-        console.log(answers);
-
-        // for(i = 0; i < questions.length; i++){
-        //     if(answers === questions[i].correctAnswer){
-        //         $("#quiz").append(i + "CORRECT!")
-        //         console.log(i + "CORRECT!")
-        //     }
-        //     else{
-        //         $("#quiz").append(i + "CORRECT!")
-        //         console.log(i + "WRONG!")
-        //     }
-        // }
+        // console.log(answers);
     
     });
+    console.log(answers);
+    for(i = 0; i < questions.length; i++){
+        if(answers[i] === questions[i].correctAnswer){
+            $("#quiz").append(i + "CORRECT!")
+            console.log(i + "CORRECT!")
+            }
+        else{
+            $("#quiz").append(i + "WRONG!")
+            console.log(i + "WRONG!")
+        }
+    }
 });
 
 //Psuedocode:
